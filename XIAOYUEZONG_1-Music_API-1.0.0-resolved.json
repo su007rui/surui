@@ -1,0 +1,1084 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Music Streaming API",
+    "description": "API for managing a music streaming platform",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/XIAOYUEZONG_1/Music_API/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/songs": {
+      "get": {
+        "summary": "Get all songs",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Song"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new song",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Song"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Song"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/songs/{id}": {
+      "get": {
+        "summary": "Get a specific song",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Song"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a song",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Song"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Song"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a song",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/albums": {
+      "get": {
+        "summary": "Get all albums",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Album"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new album",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Album"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Album"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/albums/{id}": {
+      "get": {
+        "summary": "Get a specific album",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Album"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an album",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Album"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Album"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an album",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/artists": {
+      "get": {
+        "summary": "Get all artists",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Artist"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new artist",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Artist"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/artists/{id}": {
+      "get": {
+        "summary": "Get a specific artist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an artist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Artist"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an artist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/playlists": {
+      "get": {
+        "summary": "Get all playlists",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Playlist"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new playlist",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Playlist"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Playlist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      }
+    },
+    "/playlists/{id}": {
+      "get": {
+        "summary": "Get a specific playlist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Playlist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a playlist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Playlist"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Playlist"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a playlist",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
+          },
+          "400": {
+            "description": "400 Bad Request - неправильный формат запроса"
+          },
+          "401": {
+            "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+          },
+          "403": {
+            "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+          },
+          "404": {
+            "description": "404 Not Found - запрошенный ресурс не существует"
+          },
+          "500": {
+            "description": "500 Internal Server Error - внутренняя ошибка сервера"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Song": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "artist": {
+            "type": "string"
+          },
+          "album": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "integer"
+          }
+        }
+      },
+      "Album": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "artist": {
+            "type": "string"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Artist": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "genre": {
+            "type": "string"
+          }
+        }
+      },
+      "Playlist": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "songs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Song"
+            }
+          }
+        }
+      },
+      "Device": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "Zone": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Temperature": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "celsius",
+              "fahrenheit"
+            ]
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "400 Bad Request - неправильный формат запроса"
+      },
+      "Unauthorized": {
+        "description": "401 Unauthorized - аутентификация не предоставлена или не удалась"
+      },
+      "Forbidden": {
+        "description": "403 Forbidden - нет прав для выполнения запрошенной операции"
+      },
+      "NotFound": {
+        "description": "404 Not Found - запрошенный ресурс не существует"
+      },
+      "InternalServerError": {
+        "description": "500 Internal Server Error - внутренняя ошибка сервера"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
